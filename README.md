@@ -23,8 +23,8 @@ var fork = new ForkStream({
   },
 });
 
-fork.a.pipe(console.log.bind(console, "vowels:"));
-fork.b.pipe(console.log.bind(console, "no vowels:"));
+fork.a.on("data", console.log.bind(console, "vowels:"));
+fork.b.on("data", console.log.bind(console, "no vowels:"));
 
 fork.write("hello");
 fork.write("zxcbzz");
