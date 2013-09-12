@@ -1,6 +1,6 @@
 {
   "name": "fork-stream",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Fork a stream in multiple directions according to a function",
   "main": "index.js",
   "scripts": {
