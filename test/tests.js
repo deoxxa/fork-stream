@@ -71,4 +71,24 @@ describe("fork-stream", function() {
 
     fork.end();
   });
+
+  it("should end the outputs when the input finishes", function(done) {
+    var fork = new ForkStream();
+
+    var count = 0;
+    var onEnd = function onEnd() {
+      if (++count === 2) {
+        return done();
+      }
+    };
+
+    fork.a.on("end", onEnd)
+    fork.b.on("end", onEnd);
+
+    // start "flowing" mode
+    fork.a.resume();
+    fork.b.resume();
+
+    fork.end();
+  });
 });
