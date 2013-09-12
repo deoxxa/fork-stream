@@ -16,6 +16,12 @@ var ForkStream = module.exports = function ForkStream(options) {
 
   this.a._read = function(n) {};
   this.b._read = function(n) {};
+
+  var self = this;
+  this.on("finish", function() {
+    self.a.push(null);
+    self.b.push(null);
+  });
 };
 ForkStream.prototype = Object.create(stream.Writable.prototype, {constructor: {value: ForkStream}});
 
