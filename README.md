@@ -1,4 +1,4 @@
-fork-stream [![build status](https://travis-ci.org/deoxxa/fork-stream.png)](https://travis-ci.org/deoxxa/fork)
+fork-stream [![build status](https://travis-ci.org/deoxxa/fork-stream.png)](https://travis-ci.org/deoxxa/fork-stream)
 ===========
 
 Fork a stream in multiple directions according to a function.
