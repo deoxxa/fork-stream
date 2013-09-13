@@ -14,10 +14,19 @@ var ForkStream = module.exports = function ForkStream(options) {
   this.a = new stream.Readable(options);
   this.b = new stream.Readable(options);
 
-  this.a._read = function(n) {};
-  this.b._read = function(n) {};
-
   var self = this;
+
+  var resume = function resume() {
+    if (self.resume) {
+      var r = self.resume;
+      self.resume = null;
+      r.call(null);
+    }
+  };
+
+  this.a._read = resume;
+  this.b._read = resume;
+
   this.on("finish", function() {
     self.a.push(null);
     self.b.push(null);
@@ -41,8 +50,8 @@ ForkStream.prototype._write = function _write(input, encoding, done) {
 
     if (out.push(input)) {
       return done();
+    } else {
+      self.resume = done;
     }
-
-    return out.on("drain", done);
   });
 };
